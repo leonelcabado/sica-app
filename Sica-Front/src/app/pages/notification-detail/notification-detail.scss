@@ -1,0 +1,150 @@
+.session-track-ionic {
+  color: var(--ion-color-primary);
+}
+
+.session-track-angular {
+  color: var(--ion-color-angular);
+}
+
+.session-track-communication {
+  color: var(--ion-color-communication);
+}
+
+.session-track-tooling {
+  color: var(--ion-color-tooling);
+}
+
+.session-track-services {
+  color: var(--ion-color-services);
+}
+
+.session-track-design {
+  color: var(--ion-color-design);
+}
+
+.session-track-workshop {
+  color: var(--ion-color-workshop);
+}
+
+.session-track-food {
+  color: var(--ion-color-food);
+}
+
+.session-track-documentation {
+  color: var(--ion-color-documentation);
+}
+
+.session-track-navigation {
+  color: var(--ion-color-navigation);
+}
+
+/* Favorite Icon
+ * --------------------------------------------------------
+ */
+
+.show-favorite {
+  position: relative;
+}
+
+.icon-heart-empty,
+.icon-heart {
+  --border-radius: 50%;
+  --padding-start: 0;
+  --padding-end: 0;
+
+  position: absolute;
+
+  top: 5px;
+  right: 5px;
+
+  width: 48px;
+  height: 48px;
+
+  font-size: 16px;
+
+  transition: transform 300ms ease;
+}
+
+.icon-heart-empty {
+  transform: scale(1);
+}
+
+.icon-heart {
+  transform: scale(0);
+}
+
+.show-favorite .icon-heart {
+  transform: scale(1);
+}
+
+.show-favorite .icon-heart-empty {
+  transform: scale(0);
+}
+
+h1 {
+  margin: 0;
+}
+
+hr {
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  background: var(--ion-color-step-150, #d7d8da);
+}
+
+#encabezado{
+  color: rgb(124, 28, 248);
+  margin-left: 10px;
+  margin-right: 6px;
+}
+
+#div_descrip{
+  margin-left: 10px;
+  margin-right: 6px;
+}
+p{
+  color: #3880ff
+}
+
+a{
+  text-decoration:none;
+  font-size: medium;
+}
+
+h1, span{
+  border-left: 2px solid #ac282b;//#fed035; //#fe4c52 rojo #3880ff azul---- 
+  padding-left: 10px;
+}
+
+ion-fab-button {
+  --background: var(--ion-color-step-150, #fff);
+  --background-hover: var(--ion-color-step-200, #f2f2f2);
+  --background-focused: var(--ion-color-step-250, #d9d9d9);
+
+  --color: var(--ion-color-primary, #3880ff);
+}
+
+/*
+ * Material Design uses the ripple for activated
+ * so only style the iOS activated background
+ */
+.ios ion-fab-button {
+  --background-activated: var(--ion-color-step-250, #d9d9d9);
+}
+
+.botones{
+  margin-top: 20px;
+  margin-left: 15px;
+}
+
+@media (min-width: 990px) {
+
+  ion-card{
+    width: 100%;
+    height: 100%;
+  }
+
+  #toolbar_noti{
+    display: none;
+  }
+}

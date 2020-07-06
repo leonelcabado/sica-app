@@ -1,0 +1,146 @@
+<ion-header translucent="true">
+  <ion-toolbar>
+    <ion-buttons *ngIf="!showSearchbar" slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-segment *ngIf="ios" [(ngModel)]="segment" (ionChange)="updateSchedule()">
+      <ion-segment-button value="Todas">
+        Todas
+      </ion-segment-button>
+      <ion-segment-button value="Observadas">
+        Observadas
+      </ion-segment-button>
+    </ion-segment>
+    <ion-title *ngIf="!ios">Notificaciones</ion-title>
+    <!-- <ion-title *ngIf="!ios && !showSearchbar">Notificaciones</ion-title>
+    <ion-searchbar *ngIf="showSearchbar" showCancelButton="always" [(ngModel)]="queryText" (ionChange)="updateSchedule()" (ionCancel)="showSearchbar = false" placeholder="Search"></ion-searchbar>
+    <ion-buttons slot="end">
+      <ion-button *ngIf="!ios && !showSearchbar" (click)="showSearchbar = true">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="!showSearchbar" (click)="presentFilter()">
+        <span *ngIf="ios">Filter</span>
+        <span *ngIf="!ios">
+          <ion-icon slot="icon-only" name="options"></ion-icon>
+        </span>
+      </ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+  <ion-toolbar *ngIf="!ios">
+    <ion-segment [(ngModel)]="segment" (ionChange)="updateSchedule()">
+      <ion-segment-button value="Todas">
+        Todas
+      </ion-segment-button>
+      <ion-segment-button value="Observadas">
+        Observadas
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Notificaciones</ion-title>
+    </ion-toolbar>
+    <ion-toolbar>
+      <!-- <ion-searchbar [(ngModel)]="search" (ionChange)="buscar($event)" placeholder="Search" debounce="500"></ion-searchbar> -->
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- <ion-list #scheduleList [hidden]="shownSessions === 0">
+    <ion-item-group *ngFor="let group of groups" [hidden]="group.hide">
+      <ion-item-divider sticky>
+        <ion-label>
+          {{group.time}}
+        </ion-label>
+      </ion-item-divider>
+
+      <ion-item-sliding *ngFor="let session of localizacionConNoti.notificaciones" #slidingItem [attr.track]="session.tracks[0] | lowercase"
+        [hidden]="session.hide">
+        <ion-item routerLink="/app/tabs/schedule/session/{{session.id}}">
+          <ion-label>
+            <h3>{{session.nombre}}</h3>
+          </ion-label>
+        </ion-item>
+        <ion-item-options>
+          <ion-item-option color="favorite" (click)="addFavorite(slidingItem, session)" *ngIf="segment === 'all'">
+            Observar
+          </ion-item-option>
+          <ion-item-option color="danger" (click)="removeFavorite(slidingItem, session, 'Remove Favorite')"
+            *ngIf="segment === 'favorites'">
+            Eliminar
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-item-group>
+  </ion-list> -->
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content refreshingSpinner="bubbles"></ion-refresher-content>
+  </ion-refresher>
+  
+<!-- ACA VA LO TODAS LAS NOTIF -->
+  <ion-list #scheduleList *ngIf="segment === 'Todas'"> 
+      <ion-item-group *ngFor="let group of localizaciones" >
+        <ion-item-divider sticky *ngIf="group.notificaciones.length != '0' && usuario.municipio === group.municipio">
+          <ion-label class="tituloGrupo">
+            {{group.nombre}}
+          </ion-label>
+          <ion-icon slot="end" name="eye" (click)="observar(group)" color="primary" class="ion-padding-horizontal"></ion-icon>
+          <ion-badge slot="end" color="danger">{{group.notificaciones.length}}</ion-badge>
+        </ion-item-divider>
+        
+      <ion-item-sliding  *ngFor="let notification of group.notificaciones" #slidingItem >
+        <ion-item routerLink="/app/tabs/schedule/notification/{{notification.id}}" *ngIf="usuario.municipio === group.municipio">
+          <ion-label>
+            <p>{{notification.fecha | date: 'MMM d, yyyy h:mm a'}}</p>
+            <h3>{{notification.titulo}}</h3>
+          </ion-label>
+          <!-- routerLink="/app/tabs/schedule/session/{{session.id}}" -->
+        </ion-item>
+        <ion-item-options>
+          <ion-item-option color="secondary">
+            <p>Sonda: {{notification.idSonda}}</p>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-item-group>
+  </ion-list>
+<!-- ACA VA LO DE OBSERVADAS -->
+  <ion-list #scheduleList *ngIf="segment === 'Observadas'" > 
+    <ion-item-group *ngFor="let group of localizaciones" >
+      <ion-item-divider sticky *ngIf="group.observable && group.notificaciones.length != '0' && usuario.municipio === group.municipio">
+        <ion-label class="tituloGrupo">
+          {{group.nombre}}
+        </ion-label>
+        <ion-icon slot="end" name="eye-off" (click)="noObservar(group)" color="danger"></ion-icon>
+        <ion-badge slot="end" color="danger">{{group.notificaciones.length}}</ion-badge>
+      </ion-item-divider>
+      
+    <ion-item-sliding  *ngFor="let notification of group.notificaciones" #slidingItem>
+      <ion-item *ngIf="group.observable && usuario.municipio === group.municipio" routerLink="/app/tabs/schedule/notification/{{notification.id}}">
+        <ion-label>
+          <p>{{notification.fecha | date: 'MMM d, yyyy h:mm a'}}</p>
+          <h3>{{notification.titulo}}</h3>
+        </ion-label>
+        
+      </ion-item>
+      <ion-item-options>
+        <ion-item-option color="secondary">
+          <p>Sonda: {{notification.idSonda}}</p>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-item-group>
+</ion-list>
+
+  <!-- <ion-list-header *ngIf="localizaciones.length === '0' && segment === 'Todas'">
+    No existen localizaciones con notificaciones
+  </ion-list-header>
+
+  <ion-list-header *ngIf="localizaciones.length === '0' && segment === 'Observadas'">
+    No existen notificaciones observadas
+  </ion-list-header> -->
+
+</ion-content>

@@ -1,0 +1,137 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="defaultHref"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalle Sonda</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon id="toolbar_noti" slot="icon-only" name="document-text-outline" size="large" color="primary">
+        </ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="div_descrip" *ngIf="sonda" class="ion-padding-top">
+    <h1>{{localizacion.nombre}}</h1>
+    <span color="medium">Id sonda: {{sonda.id}}</span>
+
+
+    <hr>
+
+    <p id="encabezado" no-padding>Valores actuales</p>
+
+    <ion-slides #slides [options]="sliderConfig">
+      <ion-slide>
+        <ion-card id="valoresActuales">
+          <ion-item lines="none" id="CardTemperatura" class="ion-text-wrap">
+            <ion-icon id="iconValoresAct" slot="end" color="danger" name="thermometer-outline"></ion-icon>
+            <ion-label class="ion-text-wrap">
+              <h1>{{sonda.temperatura}} °C</h1>
+              <h3>Valor Umbral: {{localizacion.vuTemp}} °C</h3>
+              <p id="fMustra">{{sonda.fechaMuestra}}</p>
+            </ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-slide>
+
+      <ion-slide>
+        <ion-card id="valoresActuales">
+          <ion-item lines="none" id="CardTurbidez">
+            <ion-icon id="iconValoresAct" slot="end" color="medium" name="water"></ion-icon>
+            <ion-label class="ion-text-wrap">
+              <h1>{{sonda.turbidez}} NTU</h1>
+              <h3>Valor Umbral: {{localizacion.vuTurb}} NTU</h3>
+              <p id="fMustra">{{sonda.fechaMuestra}}</p>
+            </ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-slide>
+
+      <ion-slide>
+        <ion-card id="valoresActuales">
+          <ion-item lines="none" id="CardConductividad">
+            <ion-icon id="iconValoresAct" slot="end" color="warning" name="flash"></ion-icon>
+            <ion-label class="ion-text-wrap">
+              <h1>{{sonda.conductividad}} mV</h1>
+              <h3>Valor Umbral: {{localizacion.vuCond}} mV</h3>
+              <p id="fMustra">{{sonda.fechaMuestra}}</p>
+            </ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-slide>
+
+      <ion-slide>
+        <ion-card id="valoresActuales">
+          <ion-item lines="none" id="CardBateria">
+            <ion-avatar slot="end"><img src="assets/img/speakers/bateria.png"></ion-avatar>
+            <ion-label class="ion-text-wrap">
+              <h1>{{sonda.estadoBateria}}%</h1>
+              <p id="fMustra">{{sonda.fechaMuestra}}</p>
+            </ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-slide>
+
+    </ion-slides>
+  </div>
+
+  <ion-item>
+    <ion-card-title><ion-label color="tertiary">Histórico</ion-label></ion-card-title>
+    <ion-icon name="analytics" slot="end"></ion-icon>
+  </ion-item>
+  <canvas #lineCanvasHistorico height="240px">
+    {{lineChartHistorico}}
+  </canvas>
+  <!-- <a href="#" (click)="downloadCanvas($event,0)">Descargar</a> -->
+  <!-- paso como parametro la posicion del canvas para identificarlo -->
+
+  
+  <ion-item>
+    <ion-card-title><ion-label color="tertiary">Consumo de bateria</ion-label></ion-card-title>
+    <ion-icon name="battery-charging" slot="end"></ion-icon>
+  </ion-item>
+  <canvas #lineCanvasBateria height="240px">
+    {{lineChartBateria}}
+  </canvas>
+  <!-- <a href="#" (click)="downloadCanvas($event,1)">Descargar</a> -->
+
+
+  <ion-list class="botones">
+    <ion-item (click)="enviarMail()" button>
+      <ion-label color="primary">Contacto vía mail</ion-label>
+      <ion-icon slot="end" color="primary" size="small" name="mail"></ion-icon>
+    </ion-item>
+  <ion-item (click)="eliminarSonda()" button>
+    <ion-label color="danger">Eliminar</ion-label>
+    <ion-icon slot="end" color="danger" size="small" name="trash"></ion-icon>
+  </ion-item>
+    <!-- <ion-chip color="primary" (click)="enviarMail()">
+      <ion-label >Contacto vía mail</ion-label>
+      <ion-icon name="mail"></ion-icon>
+    </ion-chip>
+    <ion-chip color="danger" (click)="eliminarSonda()">
+      <ion-label >Eliminar</ion-label>
+      <ion-icon name="trash"></ion-icon>
+    </ion-chip> -->
+  </ion-list>
+
+
+  <!-- <ion-fab slot="fixed" vertical="bottom" horizontal="end" #fab>
+    <ion-fab-button>
+      <ion-icon name="apps"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button color="danger" (click)="eliminarSonda()">
+        <ion-icon name="trash"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+    <ion-fab-list side="start">
+      <ion-fab-button color="success" (click)="openContact()" >
+        <ion-icon name="mail"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab> -->
+</ion-content>

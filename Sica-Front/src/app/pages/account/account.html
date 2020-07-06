@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Detalle de usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="usuario" class="ion-padding-top ion-text-center">
+    <img src="assets/img/img_avatar2.png" alt="avatar">
+    <ion-card>
+    <h2>{{usuario.fullname}}</h2>
+    <ion-list>
+      <ion-item>
+        <ion-icon slot="end" name="time-outline" color="primary"></ion-icon>
+        <ion-label>{{usuario.fecha | date:'MMM dd, yyyy hh:mm:ss a'}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="end" name="at" color="primary"></ion-icon>
+        <ion-label>{{usuario.email}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="end" name="business-outline" color="primary"></ion-icon>
+        <ion-label>{{usuario.municipio}}</ion-label>
+      </ion-item>
+      <ion-item (click)="logout()">
+        <ion-icon slot="end" name="log-out-outline" color="primary"></ion-icon>
+        <ion-label>Salir</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+  </div>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" #fab>
+    <ion-fab-button>
+      <ion-icon name="clipboard" (click)="modificarUsuario()"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  
+
+</ion-content>

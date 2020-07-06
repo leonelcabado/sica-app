@@ -1,0 +1,136 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="defaultHref"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalle notificación</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon id="toolbar_noti" slot="icon-only" name="document-text-outline" size="large" color="primary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="div_descrip" *ngIf="notificacion" class="ion-padding-top">
+  <h1>{{notificacion.titulo}}</h1>
+  <span color="medium">{{notificacion.fecha | date: 'MMM dd, yyyy hh:mm:ss a'}}</span>
+
+  <hr>
+
+  <p>Descripción: <ion-text color="dark">{{notificacion.descripcion}}</ion-text></p>
+  <p>Localización: <ion-text color="dark">{{localizacion.nombre}}</ion-text></p>
+  <p>Sonda: <ion-text color="dark">{{notificacion.idSonda}}</ion-text></p>
+
+  <hr>
+
+  </div>
+
+  
+
+  <p id="encabezado" *ngIf="!bateria">Valor actual vs ideal (fecha notificación)</p>
+  <p id="encabezado" *ngIf="bateria">Valor bateria (fecha notificación)</p>
+
+  <ion-slides  #slides [options]="sliderConfig" *ngIf="!bateria">
+    <ion-slide >
+      <ion-card > 
+        <ion-item lines="none"> 
+            <ion-card-title><ion-label color="primary">Temperatura</ion-label></ion-card-title>
+            <ion-icon slot="end" color="danger" size="large" name="thermometer-outline"></ion-icon>
+        </ion-item>
+        <canvas id="polarAreaTemp">
+          {{chart}}
+        </canvas>
+        <!-- <a href="#" (click)="downloadCanvas($event,0)" >Descargar</a> -->
+      </ion-card>
+    </ion-slide>
+  
+    <ion-slide >
+      <ion-card> 
+        <ion-item lines="none">
+          <ion-card-title><ion-label color="primary">Turbidez</ion-label></ion-card-title> 
+          <ion-icon slot="end" color="medium" size="large" name="water"></ion-icon>
+        </ion-item>
+        <canvas id="polarAreaTurb">
+          {{chart}}
+        </canvas>
+        <!-- <a href="#" (click)="downloadCanvas($event,1)" >Descargar</a> -->
+      </ion-card>
+    </ion-slide>
+  
+  
+    <ion-slide >
+      <ion-card> 
+        <ion-item lines="none">
+            <ion-card-title><ion-label color="primary">Conductividad</ion-label></ion-card-title> 
+            <ion-icon slot="end" color="warning" size="large" name="flash"></ion-icon>
+        </ion-item>
+        <canvas id="polarAreaCond">
+          {{chart}}
+        </canvas>
+        <!-- <a href="#" (click)="downloadCanvas($event,2)" >Descargar</a> -->
+      </ion-card>
+    </ion-slide>
+  </ion-slides> 
+
+  <ion-card *ngIf="bateria"> 
+    <ion-item lines="none" >
+        <ion-card-title><ion-label color="primary">Estado bateria</ion-label></ion-card-title> 
+        <ion-icon slot="end" color="warning" size="large" name="battery-charging-outline"></ion-icon>
+    </ion-item>
+    <canvas id="DoughnutChart">
+      {{chart}}
+    </canvas>
+    <!-- <a href="#" (click)="downloadCanvas($event,3)" >Descargar</a> -->
+  </ion-card>
+  
+  
+
+  <ion-list>
+    <ion-item (click)="observar()" button>
+      <ion-label color="primary">Observar</ion-label>
+      <ion-icon slot="end" color="primary" size="small" name="eye-outline"></ion-icon>
+    </ion-item>
+    <ion-item (click)="enviarMail()" button>
+      <ion-label color="primary">Contacto vía mail</ion-label>
+      <ion-icon slot="end" color="primary" size="small" name="mail"></ion-icon>
+    </ion-item>
+  <ion-item (click)="eliminarNotificacion()" button>
+    <ion-label color="danger">Eliminar</ion-label>
+    <ion-icon slot="end" color="danger" size="small" name="trash"></ion-icon>
+  </ion-item>
+  </ion-list>
+  <!-- <ion-row class="botones">
+  <ion-chip color="success" (click)="observar()">
+    <ion-label >Observar</ion-label>
+    <ion-icon name="eye"></ion-icon>
+  </ion-chip>
+  <ion-chip color="primary" (click)="enviarMail()">
+    <ion-label >Contacto</ion-label>
+    <ion-icon name="mail"></ion-icon>
+  </ion-chip>
+  <ion-chip color="danger" (click)="eliminarNotificacion()">
+    <ion-label >Eliminar</ion-label>
+    <ion-icon name="trash"></ion-icon>
+  </ion-chip>
+  </ion-row>   -->
+  <!-- <ion-fab slot="fixed" vertical="bottom" horizontal="end" #fab>
+    <ion-fab-button>
+      <ion-icon name="apps"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button color="tertiary" (click)="observar()">
+        <ion-icon name="eye-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="danger" (click)="eliminarNotificacion()">
+        <ion-icon name="trash"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+    <ion-fab-list side="start">
+      <ion-fab-button color="success" (click)="contactoNotificacion()" >
+        <ion-icon name="mail"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab> -->
+</ion-content>

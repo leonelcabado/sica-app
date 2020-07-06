@@ -1,0 +1,81 @@
+<ion-header translucent="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button *ngIf="ios" (click)="dismiss()">cancelar</ion-button>
+    </ion-buttons>
+
+    <ion-title>
+      Editar localización
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="editLocalizacion()" strong>modificar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list lines="none">
+    <ion-item>
+      <ion-icon slot="start" name="bookmark-outline"></ion-icon>
+      <!-- <ion-label position="stacked" >Usuario</ion-label> -->
+      <ion-input [(ngModel)]="nombre" name="nombre" type="text"  placeholder="Nombre" maxlength="15">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-icon slot="start" name="reorder-four-outline"></ion-icon>
+      <!-- <ion-label position="stacked" >Email</ion-label> -->
+      <ion-input [(ngModel)]="descripcion" name="descripcion" type="textArea"  placeholder="Descripcion" maxlength="50">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-icon slot="start" name="business-outline"></ion-icon>
+      <!-- <ion-label position="stacked" >Email</ion-label> -->
+      <ion-input [(ngModel)]="municipio" name="municipio" type="text"  placeholder="Municipio" maxlength="15">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-icon slot="start" name="radio-outline"></ion-icon>
+      <!-- <ion-label position="stacked" >Contraseña</ion-label> -->
+      <ion-input [(ngModel)]="idSensores" name="idSensores" type="text"  placeholder="Identificador Sensores">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-icon slot="start" name="thermometer-outline"></ion-icon>
+      <!-- <ion-label position="stacked" >Repetir Contraseña</ion-label> -->
+      <ion-input [(ngModel)]="vuTemp" name="vuTemp" type="text"  placeholder="Umbral temperatura">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-icon slot="start" name="water-outline"></ion-icon>
+      <!-- <ion-label position="stacked" >Repetir Contraseña</ion-label> -->
+      <ion-input [(ngModel)]="vuTurb" name="vuTurb" type="text"  placeholder="Umbral turbidez">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-icon slot="start" name="flash-outline"></ion-icon>
+      <!-- <ion-label position="stacked" >Repetir Contraseña</ion-label> -->
+      <ion-input [(ngModel)]="vuCond" name="vuCond" type="text"  placeholder="Umbral conductividad">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-icon slot="start" name="location-outline"></ion-icon>
+      <!-- <ion-label position="stacked" >Repetir Contraseña</ion-label> -->
+      <ion-input [(ngModel)]="lat" name="lat" type="text"  placeholder="Latitud (ej. -34.773469)">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-icon slot="start" name="location-outline"></ion-icon>
+      <!-- <ion-label position="stacked" >Repetir Contraseña</ion-label> -->
+      <ion-input [(ngModel)]="lon" name="lon" type="text"  placeholder="Longitud (ej. -58.267616)">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-icon slot="start" name="call-outline"></ion-icon>
+      <!-- <ion-label position="stacked" >Repetir Contraseña</ion-label> -->
+      <ion-input [(ngModel)]="tel" name="tel" type="text"  placeholder="Teléfono de contacto">
+      </ion-input>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

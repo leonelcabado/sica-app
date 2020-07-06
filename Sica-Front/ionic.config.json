@@ -1,0 +1,7 @@
+{
+  "name": "Sica App",
+  "type": "angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

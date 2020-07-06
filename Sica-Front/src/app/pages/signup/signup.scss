@@ -1,0 +1,90 @@
+ion-content{
+  --background: linear-gradient(180deg, #397b9c 0%, #14364b 100%);
+}
+
+ion-toolbar {
+  position: absolute;
+  border-style: none;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  --background: transparent;
+  --color: white;
+}
+
+ion-list {
+  --background: none;
+  background: none;
+  margin-bottom: 0!important;
+}
+
+ion-item{
+  --border-color: transparent!important;
+  --highlight-height: 0;
+  --background: none;
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  color: white;
+}
+
+ion-icon {
+  color: #FAFAFA;
+  font-size: x-large;
+}
+
+#boton_registrar{
+  color: white;
+  background:#17c48a;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.signup-logo {
+  
+  padding: 20px 0;
+  min-height: 200px;
+  text-align: center;
+}
+
+.signup-logo img {
+  max-width: 150px;
+}
+
+.list {
+  margin-bottom: 0;
+}
+
+#titulo_registrar{
+  color: white;
+  font-weight: bold;
+}
+
+.msg-error{
+  background-color: rgb(245, 141, 141);
+  color: white;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 990px) {
+
+  form{
+    width: 25%;
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+    
+  }
+
+}
