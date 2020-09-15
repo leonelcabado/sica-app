@@ -18,6 +18,7 @@ Implementación de un sistema integral y escalable de monitoreo y seguimiento de
 * [Maven](https://maven.apache.org/) - Manejador de dependencias de back end
 * [MongoDB](https://docs.mongodb.com/) - Base de datos utlizada
 
-## Autores ✒️
+## Resultados 📋
 
-* **Franco Leonel Cabado** - *Desarrollador* -
+https://raw.githubusercontent.com/leonelcabado/sica-app/master/img_proyecto/dloc
+
