@@ -20,5 +20,5 @@ Implementación de un sistema integral y escalable de monitoreo y seguimiento de
 
 ## Resultados 📋
 
-https://raw.githubusercontent.com/leonelcabado/sica-app/master/img_proyecto/dloc
+https://raw.githubusercontent.com/leonelcabado/sica-app/master/img_proyecto/dloc.PNG
 
